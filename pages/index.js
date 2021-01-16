@@ -5,22 +5,33 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Strength Tracker</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          {'Strength Tracker'}
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          {'Consolidated views of all of '}<a className={styles.link} href='https://www.cortlan.dev/'>my</a>{' workout progress over x years.'}
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
+          <a href="/squat" className={styles.card}>
+            <h3>{`Squat`}</h3>
+          </a>
+          <a href="/bench-press" className={styles.card}>
+            <h3>{`Bench Press`}</h3>
+          </a>
+          <a href="/deadlift" className={styles.card}>
+            <h3>{`Deadlift`}</h3>
+          </a>
+          <a href="/overhead-press" className={styles.card}>
+            <h3>{`Overhead Press`}</h3>
+          </a>
+          {/* <a href="https://nextjs.org/docs" className={styles.card}>
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
@@ -36,21 +47,11 @@ export default function Home() {
           >
             <h3>Examples &rarr;</h3>
             <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          </a> */}
         </div>
       </main>
 
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -59,7 +60,7 @@ export default function Home() {
           Powered by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
-      </footer>
+      </footer> */}
     </div>
   )
 }
