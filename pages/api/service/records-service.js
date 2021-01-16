@@ -90,10 +90,24 @@ const recordsByExercise = allExercises.map(exercise => {
     return records;
 }, {});
 
+const getAllReps = () => {
+    return workouts.map(workout => {
+        return workout.exercises.map(exercise => {
+            return exercise.sets.map(set => set.repetitions).reduce(sum, 0)
+        }).reduce(sum, 0)
+    }).reduce(sum, 0)
+}
+
+const getAllVolume = () =>
+    workouts.map(workout => exerciseService.getTotalVolume(workout.exercises))
+        .reduce(sum, 0);
+
 const getRecordsForExercise = name => {
     return recordsByExercise[name];
 }
 
 export default {
-    getRecordsForExercise
+    getRecordsForExercise,
+    getAllVolume,
+    getAllReps
 }

@@ -1,6 +1,16 @@
 import workouts from '../../../data/workouts.json'
 import recordsService from '../service/records-service';
 
+const byYear = (years, workout) => {
+    const year = new Date(workout.date).getFullYear();
+    if (year in years) {
+        years[year].push(workout);
+    } else {
+        years[year] = [workout];
+    }
+    return years;
+}
+
 export default {
     getWorkouts: async () => {
         try {
@@ -29,6 +39,20 @@ export default {
         try {
             const record = recordsService.getRecordsForExercise(args.name);
             return record;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    },
+    getWorkoutRecord: (parent, args, context, info) => {
+        try {
+            const workoutsByYears = workouts.reduce(byYear, {});
+            return {
+                numberOfWorkouts: workouts.length,
+                durationOfYears: Object.keys(workoutsByYears).length,
+                repetitions: recordsService.getAllReps(),
+                volume: recordsService.getAllVolume()
+            }
         } catch (error) {
             console.error(error);
             throw error;

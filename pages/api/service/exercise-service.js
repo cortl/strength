@@ -9,7 +9,7 @@ const getVolumeFromSets = (sets) => sets.map(getVolume).reduce(getLargestOf, 0);
 
 const sum = (a, b) => a + b
 const getTotalVolume = (exercises) => {
-    return exercises.map(exercise => exercise.sets.map(getVolume).reduce(sum)).reduce(sum)
+    return exercises.map(exercise => exercise.sets.map(getVolume).reduce(sum, 0)).reduce(sum, 0)
 }
 
 export default {

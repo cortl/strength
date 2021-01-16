@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
+
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -15,9 +17,10 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          {'Consolidated views of all of '}<a className={styles.link} href='https://www.cortlan.dev/'>my</a>{' workout progress over x years.'}
+          {`Consolidated views of all ${props.numberOfWorkouts} of `}<a className={styles.link} href='https://www.cortlan.dev/'>my</a>{` workout progress over ${props.durationOfYears} years.`}
         </p>
 
+        <h2 className={styles.subtitle}>{'Exercises'}</h2>
         <div className={styles.grid}>
           <a href="/squat" className={styles.card}>
             <h3>{`Squat`}</h3>
@@ -31,36 +34,42 @@ export default function Home() {
           <a href="/overhead-press" className={styles.card}>
             <h3>{`Overhead Press`}</h3>
           </a>
-          {/* <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a> */}
+        </div>
+        <h2 className={styles.subtitle}>{'Exercises'}</h2>
+        <div className={styles.grid}>
+          <div className={styles.card}>
+            <h3>{`Total Volume`}</h3>
+            <p>{`${props.volume.toLocaleString()}lbs`}</p>
+          </div>
+          <div className={styles.card}>
+            <h3>{`Total Reps`}</h3>
+            <p>{`${props.repetitions.toLocaleString()}`}</p>
+          </div>
         </div>
       </main>
-
-      {/* <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer> */}
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: 'http://localhost:3000/api/graphql',
+    cache: new InMemoryCache()
+  });
+
+  const {data} = await client.query({
+    query: gql`
+        query GetWorkoutRecord {
+            getWorkoutRecord {
+                numberOfWorkouts
+                durationOfYears
+                repetitions
+                volume
+            }
+        }
+    `
+  });
+  return {
+    props: data.getWorkoutRecord
+  }
 }

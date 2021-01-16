@@ -22,6 +22,12 @@ export const typeDefs = gql`
       exercises: [Exercise!]
       totalVolume: Int!
   }
+  type WorkoutRecord {
+    numberOfWorkouts: Int!
+    durationOfYears: Int!
+    volume: Int!
+    repetitions: Int!
+  }
   type AllTimeExerciseRecord {
     name: String!
     sets: Int!
@@ -34,10 +40,10 @@ export const typeDefs = gql`
     bestSetDate: String!
   }
 
-  
   type Query {
     getWorkouts: [Workout!]
     getWorkout(date: String!): Workout!
+    getWorkoutRecord: WorkoutRecord!
     getExerciseRecords(name: String!): AllTimeExerciseRecord!
   }
 `
