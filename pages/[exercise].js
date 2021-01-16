@@ -51,7 +51,7 @@ const toExerciseName = {
     'squat': 'Squat (Barbell)',
     'bench-press': 'Bench Press (Barbell)',
     'deadlift': 'Deadlift (Barbell)',
-    'overhead-press': 'Overhead Press (Barbell)'
+    'overhead-press': 'Strict Military Press (Barbell)'
 }
 
 export async function getServerSideProps(context) {
