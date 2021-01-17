@@ -17,7 +17,7 @@ export default function Home(props) {
         </h1>
 
         <p className={styles.description}>
-          {`Consolidated views of all ${props.numberOfWorkouts} of `}<a className={styles.link} href='https://www.cortlan.dev/'>my</a>{` workout progress over ${props.durationOfYears} years.`}
+          {`Consolidated views of all `}{<a className={styles.link} href="/dates">{props.numberOfWorkouts}</a>}{` of `}<a className={styles.link} href='https://www.cortlan.dev/'>my</a>{` workout progress over ${props.durationOfYears} years.`}
         </p>
 
         <h2 className={styles.subtitle}>{'Exercises'}</h2>
@@ -35,17 +35,19 @@ export default function Home(props) {
             <h3>{`Overhead Press`}</h3>
           </a>
         </div>
-        <h2 className={styles.subtitle}>{'Exercises'}</h2>
+
+        <h2 className={styles.subtitle}>{'Lifetime Stats'}</h2>
         <div className={styles.grid}>
-          <div className={styles.card}>
+          <div className={styles.card5}>
             <h3>{`Total Volume`}</h3>
             <p>{`${props.volume.toLocaleString()}lbs`}</p>
           </div>
-          <div className={styles.card}>
+          <div className={styles.card5}>
             <h3>{`Total Reps`}</h3>
             <p>{`${props.repetitions.toLocaleString()}`}</p>
           </div>
         </div>
+
       </main>
     </div>
   )

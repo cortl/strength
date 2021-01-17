@@ -6,16 +6,27 @@ import styles from '../../styles/Home.module.css'
 
 
 const buildCardForExercise = (exercise, i) => (
-    <div className={styles.card} key={`exercise${i}`}>
+    <div className={styles.card1} key={`exercise${i}`}>
         <h3>{exercise.name}</h3>
-        <ol>
-            {exercise.sets.map((set, i) => (
-                <li key={`set${i}`}>
-                    {`${set.weight} x ${set.repetitions}`}
-                </li>
-            ))}
-        </ol>
-    </div>
+        <table className={styles.table}>
+            <thead>
+                <th></th>
+                <th>{exercise.name}</th>
+                <th>{'Volume'}</th>
+                <th>{'1RM'}</th>
+            </thead>
+            <tbody>
+                {exercise.sets.map((set, i) => (
+                    <tr key={`set${i}`}>
+                        <td>{i}</td>
+                        <td>{`${set.weight} x ${set.repetitions}`}</td>
+                        <td>{set.volume}</td>
+                        <td>{set.oneRepMax}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div >
 )
 
 const Date = (props) => {
@@ -60,6 +71,8 @@ export async function getServerSideProps(context) {
                     sets {
                         weight
                         repetitions
+                        oneRepMax
+                        volume
                     }
                 }
             }

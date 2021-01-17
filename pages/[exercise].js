@@ -16,15 +16,15 @@ export default function Exercise(props) {
                 </h1>
                 <h2 className={styles.subtitle}>{'Total Metrics'}</h2>
                 <div className={styles.grid}>
-                    <div className={styles.card}>
+                    <div className={styles.card3}>
                         <h3>{'Total Volume'}</h3>
                         <p>{`${props.volume.toLocaleString()}lbs`}</p>
                     </div>
-                    <div className={styles.card}>
+                    <div className={styles.card3}>
                         <h3>{'Total Sets'}</h3>
                         <p>{props.sets.toLocaleString()}</p>
                     </div>
-                    <div className={styles.card}>
+                    <div className={styles.card3}>
                         <h3>{'Total Repetitions'}</h3>
                         <p>{props.repetitions.toLocaleString()}</p>
                     </div>
