@@ -17,7 +17,7 @@ const byYear = (years, workout) => {
 const buildCardsFor = workouts => {
     return workouts.map(workout => {
         return (
-            <a href={`/dates/${workout.date}`} className={styles.card}>
+            <a href={`/dates/${workout.date}`} className={`${styles.card} ${styles.quarter}`}>
                 <h3>{workout.title}</h3>
                 <p>{workout.date}</p>
             </a>

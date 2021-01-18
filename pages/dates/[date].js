@@ -3,10 +3,11 @@ import {useRouter} from 'next/router'
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
 import styles from '../../styles/Home.module.css'
-
+import Grid from '../../components/grid';
+import Card from '../../components/card';
 
 const buildCardForExercise = (exercise, i) => (
-    <div className={styles.card1} key={`exercise${i}`}>
+    <Card full key={`exercise${i}`}>
         <h3>{exercise.name}</h3>
         <table className={styles.table}>
             <thead>
@@ -26,7 +27,7 @@ const buildCardForExercise = (exercise, i) => (
                 ))}
             </tbody>
         </table>
-    </div >
+    </Card>
 )
 
 const Date = (props) => {
@@ -45,9 +46,9 @@ const Date = (props) => {
                 <p className={styles.description}>
                     {date}
                 </p>
-                <div className={styles.grid}>
+                <Grid>
                     {props.exercises.map(buildCardForExercise)}
-                </div>
+                </Grid>
             </main>
         </div>
     );

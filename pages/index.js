@@ -2,6 +2,8 @@ import Head from 'next/head'
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
 import styles from '../styles/Home.module.css'
+import Card from '../components/Card';
+import Grid from '../components/Grid';
 
 export default function Home(props) {
   return (
@@ -21,33 +23,32 @@ export default function Home(props) {
         </p>
 
         <h2 className={styles.subtitle}>{'Exercises'}</h2>
-        <div className={styles.grid}>
-          <a href="/squat" className={styles.card}>
+        <Grid>
+          <Card link to='/squat' half>
             <h3>{`Squat`}</h3>
-          </a>
-          <a href="/bench-press" className={styles.card}>
+          </Card>
+          <Card link to='/bench-press' half>
             <h3>{`Bench Press`}</h3>
-          </a>
-          <a href="/deadlift" className={styles.card}>
+          </Card>
+          <Card link to='/deadlift' half>
             <h3>{`Deadlift`}</h3>
-          </a>
-          <a href="/overhead-press" className={styles.card}>
+          </Card>
+          <Card link to='/overhead-press' half>
             <h3>{`Overhead Press`}</h3>
-          </a>
-        </div>
+          </Card>
+        </Grid>
 
         <h2 className={styles.subtitle}>{'Lifetime Stats'}</h2>
-        <div className={styles.grid}>
-          <div className={styles.card5}>
+        <Grid>
+          <Card half>
             <h3>{`Total Volume`}</h3>
             <p>{`${props.volume.toLocaleString()}lbs`}</p>
-          </div>
-          <div className={styles.card5}>
+          </Card>
+          <Card half>
             <h3>{`Total Reps`}</h3>
             <p>{`${props.repetitions.toLocaleString()}`}</p>
-          </div>
-        </div>
-
+          </Card>
+        </Grid>
       </main>
     </div>
   )
