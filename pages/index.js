@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 import Card from '../components/Card';
 import Grid from '../components/Grid';
 
-export default function Home(props) {
+const Home = (props) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -24,16 +24,16 @@ export default function Home(props) {
 
         <h2 className={styles.subtitle}>{'Exercises'}</h2>
         <Grid>
-          <Card link to='/squat' half>
+          <Card half link to='/squat'>
             <h3>{`Squat`}</h3>
           </Card>
-          <Card link to='/bench-press' half>
+          <Card half link to='/bench-press'>
             <h3>{`Bench Press`}</h3>
           </Card>
-          <Card link to='/deadlift' half>
+          <Card half link to='/deadlift'>
             <h3>{`Deadlift`}</h3>
           </Card>
-          <Card link to='/overhead-press' half>
+          <Card half link to='/overhead-press'>
             <h3>{`Overhead Press`}</h3>
           </Card>
         </Grid>
@@ -76,3 +76,5 @@ export async function getStaticProps() {
     props: data.getWorkoutRecord
   }
 }
+
+export default Home;

@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 import Grid from '../components/Grid';
 import Card from '../components/Card';
 
-export default function Exercise(props) {
+const Exercise = (props) => {
     return (
         <div className={styles.container}>
             <Head>
@@ -17,6 +17,7 @@ export default function Exercise(props) {
                 <h1 className={styles.title}>
                     {props.name}
                 </h1>
+
                 <h2 className={styles.subtitle}>{'Total Metrics'}</h2>
                 <Grid>
                     <Card half>
@@ -24,7 +25,7 @@ export default function Exercise(props) {
                         <p>{`${props.volume.toLocaleString()}lbs`}</p>
                     </Card>
                     <Card half>
-                        <h3>{'Total Repetitions'}</h3>
+                        <h3>{'Total Reps'}</h3>
                         <p>{`${props.repetitions.toLocaleString()}`}</p>
                     </Card>
                 </Grid>
@@ -87,3 +88,5 @@ export async function getServerSideProps(context) {
         props: data.getExerciseRecords
     }
 }
+
+export default Exercise

@@ -7,18 +7,35 @@
     border: 1px solid #eaeaea;
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
+    flex: 0 1 100%;
 }
 
 .half {
-    flex-basis: 45%;
+    flex-basis: 100%;
 }
 
-.thirds {
-    flex-basis: 28%;
+.third {
+    flex-basis: 100%;
 }
 
 .full {
     flex-basis: 100%;
+}
+
+.quarter {
+    flex-basis: 100%;
+}
+
+@media screen and (min-width: 60em) {
+    .half {
+        flex-basis: 45%;
+    }
+    .third {
+        flex-basis: 28%;
+    }
+    .full {
+        flex-basis: 100%;
+    }
 }
 
 a.card:hover, a.card:focus, a.card:active {

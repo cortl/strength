@@ -7,14 +7,16 @@ import Grid from '../../components/grid';
 import Card from '../../components/card';
 
 const buildCardForExercise = (exercise, i) => (
-    <Card full key={`exercise${i}`}>
+    <Card key={`exercise${i}`}>
         <h3>{exercise.name}</h3>
         <table className={styles.table}>
             <thead>
-                <th></th>
-                <th>{exercise.name}</th>
-                <th>{'Volume'}</th>
-                <th>{'1RM'}</th>
+                <tr>
+                    <th>{'Set'}</th>
+                    <th>{exercise.name}</th>
+                    <th>{'Volume'}</th>
+                    <th>{'1RM'}</th>
+                </tr>
             </thead>
             <tbody>
                 {exercise.sets.map((set, i) => (

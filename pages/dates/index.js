@@ -1,7 +1,10 @@
 import Head from 'next/head'
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
+import Card from '../../components/card'
+import Grid from '../../components/grid'
 import styles from '../../styles/Home.module.css'
+import {Fragment} from 'react';
 
 const byYear = (years, workout) => {
     const year = new Date(workout.date).getFullYear();
@@ -15,17 +18,17 @@ const byYear = (years, workout) => {
 }
 
 const buildCardsFor = workouts => {
-    return workouts.map(workout => {
+    return workouts.map((workout, i) => {
         return (
-            <a href={`/dates/${workout.date}`} className={`${styles.card} ${styles.quarter}`}>
+            <Card key={`workout${i}`} third link to={`/dates/${workout.date}`}>
                 <h3>{workout.title}</h3>
                 <p>{workout.date}</p>
-            </a>
+            </Card>
         );
     });
 }
 
-export default function Dates(props) {
+const Dates = (props) => {
     return (
         <div className={styles.container}>
             <Head>
@@ -38,17 +41,15 @@ export default function Dates(props) {
                     {'History'}
                 </h1>
 
-                {Object.keys(props.years).map(year => {
-                    return (
-                        <>
-                            <h2 className={styles.subtitle}>{year}</h2>
-                            <div className={styles.grid}>
-                                {buildCardsFor(props.years[year])}
-                            </div>
-                        </>
-                    )
-                })}
-
+                {Object.keys(props.years).map(year => (
+                    <Fragment key={year}>
+                        <h2 className={styles.subtitle}>{year}</h2>
+                        <Grid>
+                            {buildCardsFor(props.years[year])}
+                        </Grid>
+                    </Fragment>
+                )
+                )}
             </main>
         </div>
     )
@@ -77,3 +78,5 @@ export async function getStaticProps() {
         props: {years: data.getWorkouts.reduce(byYear, {})}
     }
 }
+
+export default Dates;

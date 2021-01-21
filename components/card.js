@@ -8,10 +8,11 @@ const Card = (props) => {
         split = styles.quarter;
     } else if (props.half) {
         split = styles.half;
-    } else if (props.thirds) {
-        split = styles.thirds;
+    } else if (props.third) {
+        split = styles.third;
+    } else {
+        split = ''
     }
-
 
     return props.link ?
         (
