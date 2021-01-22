@@ -22,7 +22,7 @@ const buildCardForExercise = (exercise, i) => (
             <tbody>
                 {exercise.sets.map((set, i) => (
                     <tr key={`set${i}`} className={set.isBest ? styles.highlight : ''}>
-                        <td>{i}</td>
+                        <td>{i + 1}</td>
                         <td>{`${set.weight} x ${set.repetitions}`}</td>
                         <td>{set.volume.toLocaleString()}</td>
                         <td>{set.oneRepMax.toLocaleString()}</td>
