@@ -7,6 +7,7 @@ export const typeDefs = gql`
       time: Int
       oneRepMax: Int!
       volume: Int!
+      isBest: Boolean!
   }
   type Exercise {
       name: String!

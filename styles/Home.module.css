@@ -31,10 +31,16 @@
   .link, .title a {
     color: #bb86fc;
   }
+  .highlight {
+    color: #bb86fc;
+  }
 }
 
 @media (prefers-color-scheme: light) {
   .link, .title a {
+    color: #0070f3;
+  }
+  .highlight {
     color: #0070f3;
   }
 }
@@ -74,10 +80,6 @@
 
 .logo {
   height: 1em;
-}
-
-.right {
-  float: right
 }
 
 .table {

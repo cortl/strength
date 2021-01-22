@@ -21,7 +21,7 @@ const buildCardForExercise = (exercise, i) => (
             </thead>
             <tbody>
                 {exercise.sets.map((set, i) => (
-                    <tr key={`set${i}`}>
+                    <tr key={`set${i}`} className={set.isBest ? styles.highlight : ''}>
                         <td>{i}</td>
                         <td>{`${set.weight} x ${set.repetitions}`}</td>
                         <td>{set.volume.toLocaleString()}</td>
@@ -77,6 +77,7 @@ export async function getServerSideProps(context) {
                         repetitions
                         oneRepMax
                         volume
+                        isBest
                     }
                 }
             }
