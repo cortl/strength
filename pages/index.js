@@ -2,8 +2,8 @@ import Head from 'next/head'
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
 import styles from '../styles/Home.module.css'
-import Card from '../components/Card';
-import Grid from '../components/Grid';
+import Card from '../components/card';
+import Grid from '../components/grid';
 
 const Home = (props) => {
   return (

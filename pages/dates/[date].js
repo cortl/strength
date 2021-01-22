@@ -1,8 +1,9 @@
-import Head from 'next/head'
-import {useRouter} from 'next/router'
+import Head from 'next/head';
+import {useRouter} from 'next/router';
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Home.module.css';
+import table from '../../styles/Table.module.css';
 import Grid from '../../components/grid';
 import Card from '../../components/card';
 
@@ -12,10 +13,10 @@ const buildCardForExercise = (exercise, i) => (
         <table className={styles.table}>
             <thead>
                 <tr>
-                    <th>{'Set'}</th>
-                    <th>{exercise.name}</th>
-                    <th>{'Volume'}</th>
-                    <th>{'1RM'}</th>
+                    <th className={`${table.head} ${table.number}`}>{'Set'}</th>
+                    <th className={table.head}>{exercise.name}</th>
+                    <th className={`${table.head} ${table.number}`}>{'Volume'}</th>
+                    <th className={`${table.head} ${table.number}`}>{'1RM'}</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,8 +24,8 @@ const buildCardForExercise = (exercise, i) => (
                     <tr key={`set${i}`}>
                         <td>{i}</td>
                         <td>{`${set.weight} x ${set.repetitions}`}</td>
-                        <td>{set.volume}</td>
-                        <td>{set.oneRepMax}</td>
+                        <td>{set.volume.toLocaleString()}</td>
+                        <td>{set.oneRepMax.toLocaleString()}</td>
                     </tr>
                 ))}
             </tbody>

@@ -12,3 +12,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background: #121212;
+    color: white;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html, body {
+    background: white;
+    color: black;
+  }
+}

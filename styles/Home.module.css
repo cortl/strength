@@ -19,12 +19,24 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #bb86fc;
   text-decoration: none;
 }
 
 .link {
-  color: #0070f3;
+  color: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+  .link, .title a {
+    color: #bb86fc;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .link, .title a {
+    color: #0070f3;
+  }
 }
 
 .title a:hover, .title a:focus, .title a:active {

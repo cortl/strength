@@ -38,13 +38,24 @@
     }
 }
 
-a.card:hover, a.card:focus, a.card:active {
-    color: #0070f3;
-    border-color: #0070f3;
+@media (prefers-color-scheme: dark) {
+    a.card:hover, a.card:focus, a.card:active {
+        color: #bb86fc;
+        border-color: #bb86fc;
+    }
+    .card a {
+        color: #bb86fc;
+    }
 }
 
-.card a {
-    color: #0070f3;
+@media (prefers-color-scheme: light) {
+    a.card:hover, a.card:focus, a.card:active {
+        color: #0070f3;
+        border-color: #0070f3;
+    }
+    .card a {
+        color: #0070f3;
+    }
 }
 
 .card a:hover {
