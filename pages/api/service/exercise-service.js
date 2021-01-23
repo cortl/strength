@@ -19,15 +19,15 @@ const getTotalVolume = (exercises) => {
 
 const getBestSetIndex = (sets) => {
     return sets.reduce((bestSet, set, i) => {
-        const {reps, weight} = set;
+        const {repetitions, weight} = set;
         if (weight > bestSet.weight) {
-            return {index: i, reps, weight}
-        } else if (weight === bestSet.weight && reps > bestSet.reps) {
-            return {index: i, reps, weight}
+            return {index: i, repetitions, weight}
+        } else if (weight === bestSet.weight && repetitions > bestSet.repetitions) {
+            return {index: i, repetitions, weight}
         } else {
             return bestSet;
         }
-    }, {index: -1, reps: -1, weight: -1}).index;
+    }, {index: -1, repetitions: -1, weight: -1}).index;
 }
 
 const withBestSet = (bestSetIndex) => (set, i) => {
