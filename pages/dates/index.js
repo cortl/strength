@@ -4,6 +4,8 @@ import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 import Card from '../../components/card'
 import Grid from '../../components/grid'
 import styles from '../../styles/Home.module.css'
+import table from '../../styles/Table.module.css';
+
 import {Fragment} from 'react';
 
 const byYear = (years, workout) => {
@@ -17,12 +19,36 @@ const byYear = (years, workout) => {
     return years;
 }
 
+const hasBest = exercise => {
+    return Boolean(exercise.sets.filter(set => set.isBest).length)
+}
+
 const buildCardsFor = workouts => {
     return workouts.map((workout, i) => {
         return (
-            <Card key={`workout${i}`} third link to={`/dates/${workout.date}`}>
+            <Card key={`workout${i}`} half link to={`/dates/${workout.date}`}>
                 <h3>{workout.title}</h3>
                 <p>{workout.date}</p>
+                <table className={styles.table}>
+                    <thead>
+                        <th className={table.head}>{'Exercise'}</th>
+                        <th className={`${table.head} ${table.bignum}`}>{'Best Set'}</th>
+                    </thead>
+                    <tbody>
+                        {
+                            workout.exercises.filter(hasBest).map(exercise => {
+                                console.log(exercise)
+                                const bestSet = exercise.sets.find(set => set.isBest);
+                                return (
+                                    <tr>
+                                        <td>{exercise.name}</td>
+                                        <td>{`${bestSet.weight} x ${bestSet.repetitions ?? `${bestSet.time}s`}`}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
             </Card>
         );
     });
@@ -69,6 +95,12 @@ export async function getStaticProps() {
                 date
                 exercises {
                     name
+                    sets {
+                        weight
+                        repetitions
+                        time
+                        isBest
+                    }
                 }
             }
         }
