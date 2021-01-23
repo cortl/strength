@@ -1,5 +1,6 @@
 import workouts from '../../../data/workouts.json'
 import recordsService from '../service/records-service';
+import workoutService from '../service/workouts-service';
 
 const byYear = (years, workout) => {
     const year = new Date(workout.date).getFullYear();
@@ -53,6 +54,24 @@ export default {
                 repetitions: recordsService.getAllReps(),
                 volume: recordsService.getAllVolume()
             }
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    },
+    getOneRepMaxOverTime: (parent, args, context, info) => {
+        try {
+            const {name: exercise} = args;
+            return workoutService.getOneRepMaxByDateForExercise(exercise);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    },
+    getVolumeOverTime: (parent, args, context, info) => {
+        try {
+            const {name: exercise} = args;
+            return workoutService.getVolumeByDateForExercise(exercise);
         } catch (error) {
             console.error(error);
             throw error;

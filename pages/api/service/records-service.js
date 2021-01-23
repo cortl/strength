@@ -60,7 +60,7 @@ const getOneRepMax = (exerciseName) => {
 const getBestVolume = (exerciseName) => {
     const best = workouts.map(workout => {
         const relevantExercises = workout.exercises.filter(exercise => exercise.name === exerciseName);
-        const bestSet = relevantExercises.map(exercise => exerciseService.getVolumeFromSets(exercise.sets)).reduce(getLargestOf, 0);
+        const bestSet = relevantExercises.map(exercise => exerciseService.getBestVolumeFromSets(exercise.sets)).reduce(getLargestOf, 0);
         return {date: workout.date, number: bestSet};
     }).reduce((previous, current) => (previous.number > current.number) ? previous : current);
 

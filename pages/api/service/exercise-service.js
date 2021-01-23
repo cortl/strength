@@ -7,7 +7,8 @@ const getOneRepMax = (set) => Math.ceil(getBrzycki1RM(set))
 const getOneRepMaxFromSets = (sets) => Math.ceil(sets.map(getBrzycki1RM).reduce(getLargestOf, 0));
 
 const getVolume = ({weight, repetitions}) => weight * repetitions
-const getVolumeFromSets = (sets) => sets.map(getVolume).reduce(getLargestOf, 0);
+const getBestVolumeFromSets = (sets) => sets.map(getVolume).reduce(getLargestOf, 0);
+const getVolumeFromSets = (sets) => sets.map(getVolume).reduce(sum, 0);
 
 const getWeight = ({weight}) => weight;
 const getBestWeightFromSets = (sets) => sets.map(getWeight).reduce(getLargestOf, 0);
@@ -61,6 +62,7 @@ export default {
     getOneRepMaxFromSets,
 
     getVolume,
+    getBestVolumeFromSets,
     getVolumeFromSets,
 
     getBestWeightFromSets,

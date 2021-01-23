@@ -4,29 +4,30 @@ import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 import styles from '../styles/Home.module.css'
 import Grid from '../components/grid';
 import Card from '../components/card';
+import Chart from '../components/chart';
 
-const Exercise = (props) => {
+const Exercise = ({records, oneRepMaxData, volumeData}) => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>{props.name} | Strength Tracker</title>
+                <title>{records.name} | Strength Tracker</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    {props.name}
+                    {records.name}
                 </h1>
 
                 <h2 className={styles.subtitle}>{'Total Metrics'}</h2>
                 <Grid>
                     <Card half>
                         <h3>{'Total Volume'}</h3>
-                        <p>{`${props.volume.toLocaleString()}lbs`}</p>
+                        <p>{`${records.volume.toLocaleString()}lbs`}</p>
                     </Card>
                     <Card half>
                         <h3>{'Total Reps'}</h3>
-                        <p>{`${props.repetitions.toLocaleString()}`}</p>
+                        <p>{`${records.repetitions.toLocaleString()}`}</p>
                     </Card>
                 </Grid>
 
@@ -34,13 +35,23 @@ const Exercise = (props) => {
                 <Grid>
                     <Card half>
                         <h3>{'One Rep Max'}</h3>
-                        <p>{`${props.oneRepMax.toLocaleString()}lbs`}</p>
-                        <p>{'achieved on '}<a href={`/dates/${props.oneRepMaxDate}`}>{props.oneRepMaxDate}</a></p>
+                        <p>{`${records.oneRepMax.toLocaleString()}lbs`}</p>
+                        <p>{'achieved on '}<a href={`/dates/${records.oneRepMaxDate}`}>{records.oneRepMaxDate}</a></p>
                     </Card>
                     <Card half>
                         <h3>{'Best Volume'}</h3>
-                        <p>{`${props.bestSet.toLocaleString()}lbs`}</p>
-                        <p>{'achieved on '}<a href={`/dates/${props.bestSetDate}`}>{props.bestSetDate}</a></p>
+                        <p>{`${records.bestSet.toLocaleString()}lbs`}</p>
+                        <p>{'achieved on '}<a href={`/dates/${records.bestSetDate}`}>{records.bestSetDate}</a></p>
+                    </Card>
+                </Grid>
+                <Grid>
+                    <Card full>
+                        <h3>{'1RM Progression Over Time'}</h3>
+                        <Chart data={oneRepMaxData} />
+                    </Card>
+                    <Card full>
+                        <h3>{'Volume Over Time'}</h3>
+                        <Chart data={volumeData} />
                     </Card>
                 </Grid>
             </main>
@@ -67,7 +78,7 @@ export async function getServerSideProps(context) {
     const {data} = await client.query({
         query: gql`
         query GetExerciseRecords($exercise: String!) {
-                    getExerciseRecords(name: $exercise) {
+            getExerciseRecords(name: $exercise) {
                 name
                 volume
                 sets
@@ -77,6 +88,14 @@ export async function getServerSideProps(context) {
                 bestSet
                 bestSetDate
             }
+            getOneRepMaxOverTime(name: $exercise) {
+                date
+                value
+            }
+            getVolumeOverTime(name: $exercise) {
+                date
+                value
+            }
         }
     `,
         variables: {
@@ -85,7 +104,11 @@ export async function getServerSideProps(context) {
     });
 
     return {
-        props: data.getExerciseRecords
+        props: {
+            records: data.getExerciseRecords,
+            oneRepMaxData: data.getOneRepMaxOverTime,
+            volumeData: data.getVolumeOverTime
+        }
     }
 }
 

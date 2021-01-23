@@ -42,11 +42,17 @@ export const typeDefs = gql`
     bestSet: Int!
     bestSetDate: String!
   }
+  type Stat {
+    date: String!
+    value: Int!
+  }
 
   type Query {
     getWorkouts: [Workout!]
     getWorkout(date: String!): Workout!
     getWorkoutRecord: WorkoutRecord!
     getExerciseRecords(name: String!): AllTimeExerciseRecord!
+    getOneRepMaxOverTime(name: String!): [Stat!]!
+    getVolumeOverTime(name: String!): [Stat!]!
   }
 `

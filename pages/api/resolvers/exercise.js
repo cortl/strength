@@ -5,7 +5,7 @@ export default {
         return exerciseService.getOneRepMaxFromSets(parent.sets);
     },
     bestSetVolume: (parent, args, context, info) => {
-        return exerciseService.getVolumeFromSets(parent.sets);
+        return exerciseService.getBestVolumeFromSets(parent.sets);
     },
     sets: (parent, args, context, info) => {
         return exerciseService.mapWithBestSet(parent.sets);

@@ -11,6 +11,19 @@ const getBestOneRepForGivenExercise = (exerciseName, workout) => {
 
     return exerciseService.getOneRepMaxFromSets(workout.exercises[exerciseIndex].sets);
 }
+const getBestWeightForGivenExercise = (exerciseName, workout) => {
+    const exercisesInWorkout = workout.exercises.map(exerciseToName);
+    const exerciseIndex = exercisesInWorkout.findIndex(exercise => exercise === exerciseName);
+
+    return exerciseService.getBestWeightFromSets(workout.exercises[exerciseIndex].sets);
+}
+const getTotalVolumeForGivenExercise = (exerciseName, workout) => {
+    const exercisesInWorkout = workout.exercises.map(exerciseToName);
+    const exerciseIndex = exercisesInWorkout.findIndex(exercise => exercise === exerciseName);
+
+    return exerciseService.getVolumeFromSets(workout.exercises[exerciseIndex].sets);
+}
+
 const workoutContainsExercise = exerciseName => workout => workout.exercises.map(exerciseToName).includes(exerciseName);
 const getLastOneRepMax = (exerciseName, fromDate) => {
     const previousWorkouts = workouts
@@ -25,12 +38,7 @@ const getLastOneRepMax = (exerciseName, fromDate) => {
     return previousBest;
 }
 
-const getBestWeightForGivenExercise = (exerciseName, workout) => {
-    const exercisesInWorkout = workout.exercises.map(exerciseToName);
-    const exerciseIndex = exercisesInWorkout.findIndex(exercise => exercise === exerciseName);
 
-    return exerciseService.getBestWeightFromSets(workout.exercises[exerciseIndex].sets);
-}
 const getLastHeaviestWeight = (exerciseName, fromDate) => {
     const previousWorkouts = workouts
         .filter(workout => new Date(workout.date) < fromDate)
@@ -45,7 +53,35 @@ const getLastHeaviestWeight = (exerciseName, fromDate) => {
 
 }
 
+const getOneRepMaxByDateForExercise = (exercise) => {
+    return workouts
+        .filter(workoutContainsExercise(exercise))
+        .map(workout => {
+            const oneRep = getBestOneRepForGivenExercise(exercise, workout)
+            return {
+                date: workout.date,
+                value: oneRep
+            }
+        })
+}
+
+
+const getVolumeByDateForExercise = (exercise) => {
+    return workouts
+        .filter(workoutContainsExercise(exercise))
+        .map(workout => {
+            const oneRep = getTotalVolumeForGivenExercise(exercise, workout)
+            return {
+                date: workout.date,
+                value: oneRep
+            }
+        })
+}
+
 export default {
     getLastOneRepMax,
-    getLastHeaviestWeight
+    getLastHeaviestWeight,
+
+    getOneRepMaxByDateForExercise,
+    getVolumeByDateForExercise
 }
