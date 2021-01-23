@@ -17,3 +17,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Resources
 - [Dark Theme](https://material.io/design/color/dark-theme.html#ui-application)
+- [Using D3.js inside a React App](https://www.pluralsight.com/guides/using-d3.js-inside-a-react-app)
+- [D3.js Line Chart](https://observablehq.com/@d3/line-chart)
