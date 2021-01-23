@@ -37,7 +37,6 @@ const buildCardsFor = workouts => {
                     <tbody>
                         {
                             workout.exercises.filter(hasBest).map(exercise => {
-                                console.log(exercise)
                                 const bestSet = exercise.sets.find(set => set.isBest);
                                 return (
                                     <tr>
