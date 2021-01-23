@@ -38,7 +38,7 @@ const Exercise = (props) => {
                         <p>{'achieved on '}<a href={`/dates/${props.oneRepMaxDate}`}>{props.oneRepMaxDate}</a></p>
                     </Card>
                     <Card half>
-                        <h3>{'Best Set'}</h3>
+                        <h3>{'Best Volume'}</h3>
                         <p>{`${props.bestSet.toLocaleString()}lbs`}</p>
                         <p>{'achieved on '}<a href={`/dates/${props.bestSetDate}`}>{props.bestSetDate}</a></p>
                     </Card>

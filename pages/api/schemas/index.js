@@ -14,6 +14,8 @@ export const typeDefs = gql`
       sets: [Set]
       bestSet1RM: Int!
       bestSetVolume: Int!
+      is1RMPr: Boolean!
+      isWeightPr: Boolean!
   }
   type Workout {
       title: String!

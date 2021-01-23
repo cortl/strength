@@ -50,6 +50,21 @@ const Date = (props) => {
                     {date}
                 </p>
                 <Grid>
+                    <Card half>
+                        <h3>{'Total Volume'}</h3>
+                        <p>{`${props.totalVolume.toLocaleString()}lbs`}</p>
+                    </Card>
+                    <Card half>
+                        <h3>{'PRs'}</h3>
+                        {
+                            props.exercises
+                                .filter(exercise => exercise.is1RMPr).length
+                            + props.exercises
+                                .filter(exercise => exercise.isWeightPr).length
+                        }
+                    </Card>
+                </Grid>
+                <Grid>
                     {props.exercises.map(buildCardForExercise)}
                 </Grid>
             </main>
@@ -70,8 +85,11 @@ export async function getServerSideProps(context) {
             getWorkout(date: $date) {
                 title
                 bodyWeight
+                totalVolume
                 exercises {
                     name
+                    is1RMPr
+                    isWeightPr
                     sets {
                         weight
                         repetitions
