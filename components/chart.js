@@ -1,6 +1,9 @@
 import React from 'react';
-import {useD3} from '../hooks/d3';
 import * as d3 from 'd3';
+
+import {useD3} from '../hooks/d3';
+
+import chart from '../styles/Chart.module.css'
 
 const Chart = ({data}) => {
     const ref = useD3(
@@ -19,7 +22,7 @@ const Chart = ({data}) => {
 
             const xAxis = g => g
                 .attr("transform", `translate(0,${height - margin.bottom})`)
-                .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
+                .call(d3.axisBottom(x).ticks(width / 90).tickSizeOuter(0))
 
             const yAxis = g => g
                 .attr("transform", `translate(${margin.left},0)`)
@@ -45,13 +48,26 @@ const Chart = ({data}) => {
             svg.select('.plot-area')
                 .datum(data)
                 .attr("fill", "none")
-                .attr("stroke", "white")
+                .attr("stroke", "#bb86fc")
                 .attr("stroke-width", 1.5)
                 .attr("stroke-linejoin", "round")
                 .attr("stroke-linecap", "round")
                 .attr("d", line);
+
+            svg
+                .select('.dots')
+                .selectAll("dot")
+                .data(data)
+                .enter()
+                .append("circle")
+                .attr("cx", d => x(new Date(d.date)))
+                .attr("cy", d => y(d.value))
+                .attr("r", 5)
+                .attr("fill", "#bb86fc")
         },
         [data.length]
+
+
     );
 
     return (
@@ -59,8 +75,9 @@ const Chart = ({data}) => {
             ref={ref}
         >
             <path className="plot-area" />
-            <g className="x-axis" />
-            <g className='y-axis' />
+            <g className="dots" />
+            <g className={`x-axis ${chart.legend}`} />
+            <g className={`y-axis ${chart.legend}`} />
         </svg>
     );
 }

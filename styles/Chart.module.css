@@ -1,0 +1,9 @@
+.legend {
+    font-size: 1.25em;
+}
+
+@media (max-width: 400px) {
+    .legend {
+        font-size: 2em;
+    }
+}
