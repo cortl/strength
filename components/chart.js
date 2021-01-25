@@ -26,7 +26,7 @@ const Chart = ({data: info}) => {
         (svg) => {
             const height = 500;
             const width = 800;
-            const margin = {top: 20, right: 30, bottom: 30, left: 40};
+            const margin = {top: 20, right: 30, bottom: 30, left: 50};
 
             const x = d3.scaleUtc()
                 .domain(d3.extent(data, d => new Date(d.date)))
@@ -38,17 +38,29 @@ const Chart = ({data: info}) => {
 
             const xAxis = g => g
                 .attr("transform", `translate(0,${height - margin.bottom})`)
-                .call(d3.axisBottom(x).ticks(width / 90).tickSizeOuter(0))
+                .call(d3.axisBottom(x).ticks(5).tickSizeOuter(0))
 
             const yAxis = g => g
-                .attr("transform", `translate(${margin.left},0)`)
-                .call(d3.axisLeft(y))
+                .attr("transform", `translate(${margin.left - 10},0)`)
+                .call(d3.axisLeft(y).ticks(5, "s"))
                 .call(g => g.select(".domain").remove())
                 .call(g => g.select(".tick:last-of-type text").clone()
                     .attr("x", 3)
                     .attr("text-anchor", "start")
                     .attr("font-weight", "bold")
                     .text(data.y))
+
+            const make_y_gridlines = () => {
+                return d3.axisLeft(y)
+                    .ticks(5)
+            }
+
+            svg.append("g")
+                .attr("class", chart.grid)
+                .call(make_y_gridlines()
+                    .tickSize(-width)
+                    .tickFormat("")
+                )
 
             const line = d3.line()
                 .defined(d => !isNaN(d.value))
@@ -58,7 +70,7 @@ const Chart = ({data: info}) => {
             svg.select(".x-axis").call(xAxis);
             svg.select(".y-axis").call(yAxis);
 
-            svg.attr("viewBox", [0, 0, width, height]);
+            svg.attr("viewBox", [-10, 0, width, height]);
 
 
             svg.select('.plot-area')
@@ -94,10 +106,12 @@ const Chart = ({data: info}) => {
             <Button onClick={() => setRange(ONE_YEAR)} pushed={range === ONE_YEAR} text={'Last 12 Months'} />
             <Button onClick={() => setRange(SIX_MONTHS)} pushed={range === SIX_MONTHS} text={'Last 6 Months'} />
             <svg
+                className={chart.legend}
                 ref={ref}
             >
                 <path className="plot-area" />
                 <g className="dots" />
+                <g className={'trend'} />
                 <g className={`x-axis ${chart.legend}`} />
                 <g className={`y-axis ${chart.legend}`} />
             </svg>
