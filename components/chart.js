@@ -1,11 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as d3 from 'd3';
+import sub from 'date-fns/sub'
 
 import {useD3} from '../hooks/d3';
+import Button from './button';
 
 import chart from '../styles/Chart.module.css'
 
-const Chart = ({data}) => {
+const ALL_TIME = 100;
+const ONE_YEAR = sub(new Date(), {years: 1});
+const SIX_MONTHS = sub(new Date(), {months: 6});
+
+const Chart = ({data: info}) => {
+
+    const [range, setRange] = useState(ALL_TIME)
+    const byRange = (point) => {
+        if (range == ALL_TIME) {
+            return true;
+        } else {
+            return new Date(point.date) > range;
+        }
+    }
+    const data = info.filter(byRange)
     const ref = useD3(
         (svg) => {
             const height = 500;
@@ -52,7 +68,9 @@ const Chart = ({data}) => {
                 .attr("stroke-width", 1.5)
                 .attr("stroke-linejoin", "round")
                 .attr("stroke-linecap", "round")
-                .attr("d", line);
+                .attr("d", line)
+
+            svg.selectAll('circle').remove();
 
             svg
                 .select('.dots')
@@ -63,22 +81,27 @@ const Chart = ({data}) => {
                 .attr("cx", d => x(new Date(d.date)))
                 .attr("cy", d => y(d.value))
                 .attr("r", 5)
-                .attr("fill", "#bb86fc")
+                .attr("stroke-width", 1.5)
+                .attr("stroke", "#bb86fc")
         },
         [data.length]
-
 
     );
 
     return (
-        <svg
-            ref={ref}
-        >
-            <path className="plot-area" />
-            <g className="dots" />
-            <g className={`x-axis ${chart.legend}`} />
-            <g className={`y-axis ${chart.legend}`} />
-        </svg>
+        <>
+            <Button onClick={() => setRange(ALL_TIME)} pushed={range === ALL_TIME} text={'All Time'} />
+            <Button onClick={() => setRange(ONE_YEAR)} pushed={range === ONE_YEAR} text={'Last 12 Months'} />
+            <Button onClick={() => setRange(SIX_MONTHS)} pushed={range === SIX_MONTHS} text={'Last 6 Months'} />
+            <svg
+                ref={ref}
+            >
+                <path className="plot-area" />
+                <g className="dots" />
+                <g className={`x-axis ${chart.legend}`} />
+                <g className={`y-axis ${chart.legend}`} />
+            </svg>
+        </>
     );
 }
 

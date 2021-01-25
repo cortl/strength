@@ -1,0 +1,40 @@
+.button {
+    display: inline-block;
+    padding: 0.2em 1.45em;
+    margin: 0.1em;
+    border: 0.15em solid #bb86fc;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #000000;
+    background-color: #121212;
+    text-align: center;
+    position: relative;
+    color: white;
+    border-radius: 50px;
+    transition: all 0.05s ease-in
+}
+
+.pushed {
+    background-color: #bb86fc;
+    color: black;
+}
+
+.button:hover {
+    border-color: #bb86fc;
+    background-color: #bb86fc;
+    color: black;
+}
+
+.button:active {
+    background-color: #bb86fc;
+    color: black;
+}
+
+@media all and (max-width:30em) {
+    a.button {
+        display: block;
+        margin: 0.2em auto;
+    }
+}
