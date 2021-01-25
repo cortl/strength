@@ -1,12 +1,31 @@
 import Head from 'next/head'
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
+import sub from 'date-fns/sub'
 
 import styles from '../styles/Home.module.css'
 import Grid from '../components/grid';
 import Card from '../components/card';
 import Chart from '../components/chart';
+import {useState} from 'react';
+
+const ALL_TIME = 100;
+const ONE_YEAR = sub(new Date(), {years: 1});
+const SIX_MONTHS = sub(new Date(), {months: 6});
+
+
 
 const Exercise = ({records, oneRepMaxData, volumeData}) => {
+
+    const [range, setRange] = useState(ALL_TIME)
+
+    const byRange = (point) => {
+        if (range == ALL_TIME) {
+            return true;
+        } else {
+            return new Date(point.date) > range;
+        }
+    }
+
     return (
         <div className={styles.container}>
             <Head>
@@ -47,7 +66,9 @@ const Exercise = ({records, oneRepMaxData, volumeData}) => {
                 <Grid>
                     <Card full>
                         <h3>{'1RM Progression Over Time'}</h3>
-                        <Chart data={oneRepMaxData} />
+                        <button onClick={() => setRange(ALL_TIME)}>{'All Time'}</button>
+                        <button onClick={() => setRange(ONE_YEAR)}>{'Last 12 Months'}</button>
+                        <Chart data={oneRepMaxData.filter(byRange)} />
                     </Card>
                     <Card full>
                         <h3>{'Volume Over Time'}</h3>
