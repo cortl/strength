@@ -47,8 +47,7 @@ const Chart = ({data: info}) => {
                 .call(g => g.select(".tick:last-of-type text").clone()
                     .attr("x", 3)
                     .attr("text-anchor", "start")
-                    .attr("font-weight", "bold")
-                    .text(data.y))
+                    .text('lbs'))
 
             const make_y_gridlines = () => {
                 return d3.axisLeft(y)

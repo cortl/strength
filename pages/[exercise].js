@@ -4,7 +4,7 @@ import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 import styles from '../styles/Home.module.css'
 import Grid from '../components/grid';
 import Card from '../components/card';
-import Chart from '../components/chart';
+import Apex from '../components/apex';
 
 const Exercise = ({records, oneRepMaxData, volumeData}) => {
     return (
@@ -47,11 +47,11 @@ const Exercise = ({records, oneRepMaxData, volumeData}) => {
                 <Grid>
                     <Card full>
                         <h3>{'1RM Progression Over Time'}</h3>
-                        <Chart data={oneRepMaxData} />
+                        <Apex title={'1RM'} data={oneRepMaxData} />
                     </Card>
                     <Card full>
                         <h3>{'Volume Over Time'}</h3>
-                        <Chart data={volumeData} />
+                        <Apex title={'Volume'} data={volumeData} />
                     </Card>
                 </Grid>
             </main>
