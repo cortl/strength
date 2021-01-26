@@ -24,7 +24,7 @@ export const formatDate = (date) => {
     return [month, day, year].join('-');
 }
 
-const Apex = ({title, data: info}) => {
+const LineChart = ({title, data: info}) => {
     const router = useRouter();
     const [range, setRange] = useState(ALL_TIME)
     const byRange = (point) => {
@@ -137,4 +137,4 @@ const Apex = ({title, data: info}) => {
     )
 }
 
-export default Apex;
+export default LineChart;
